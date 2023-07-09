@@ -1,7 +1,7 @@
 services:
-  postgres:
-    container_name: pgalpine
-    image: postgres:alpine
+  pg15alpine:
+    container_name: pg15alpine
+    image: postgres:15-alpine
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PW}
@@ -10,8 +10,8 @@ services:
       - "5432:5432"
     restart: always
 
-  pgadmin:
-    container_name: pgadmin-pgalpine
+  pgadmin4:
+    container_name: pgadmin4
     image: dpage/pgadmin4:latest
     environment:
       - PGADMIN_DEFAULT_EMAIL=${PGADMIN_MAIL}

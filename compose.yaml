@@ -1,4 +1,5 @@
 services:
+
   pg15alpine:
     container_name: pg15alpine
     image: postgres:15-alpine
@@ -7,7 +8,7 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PW}
       - POSTGRES_DB=${POSTGRES_DB} #optional (specify default database instead of $POSTGRES_DB)
     ports:
-      - "5432:5432"
+      - "54301:5432"
     restart: always
 
   pgadmin4:

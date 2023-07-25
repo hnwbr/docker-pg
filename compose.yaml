@@ -1,5 +1,4 @@
 services:
-
   pg15alpine:
     image: postgres:15-alpine
     restart: always
@@ -11,9 +10,12 @@ services:
     networks:
       - net_pg
     ports:
-      - "54321:54321"
+      - '54321:54321'
     volumes:
       - vol_pg15_data:/var/lib/postgresql/data/pgdata
+      - type: bind
+        source: ./postgresql.conf
+        target: /etc/postgresql/postgresql.conf
 
   pgadmin4:
     image: dpage/pgadmin4:latest
@@ -24,12 +26,14 @@ services:
     networks:
       - net_pg
     ports:
-      - "5050:80"
+      - '5050:80'
     depends_on:
       - pg15alpine
 
 networks:
-  net_pg: {}
+  net_pg:
+    external: true
 
 volumes:
-  vol_pg15_data: {}
+  vol_pg15_data:
+    external: true

@@ -6,16 +6,17 @@ services:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PW}
       - POSTGRES_DB=${POSTGRES_DB}
-      - PGDATA=/var/lib/postgresql/data/pgdata
+      # - PGDATA=/var/lib/postgresql/data/pgdata
     networks:
       - net_pg
     ports:
       - '54321:54321'
     volumes:
-      - vol_pg15_data:/var/lib/postgresql/data/pgdata
-      - type: bind
-        source: ./postgresql.conf
-        target: /etc/postgresql/postgresql.conf
+      - ./db-mount:/var/lib/postgresql/
+      # - vol_pg15_data:/var/lib/postgresql/data/pgdata
+      # - type: bind
+      #   source: ./postgresql.conf
+      #   target: /etc/postgresql/postgresql.conf
 
   pgadmin4:
     image: dpage/pgadmin4:latest

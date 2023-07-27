@@ -1,3 +1,5 @@
+/db-mount
+
 # dotenv environment variables file
 .env
 .env.local

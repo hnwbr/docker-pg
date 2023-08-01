@@ -6,3 +6,6 @@ sudo docker run -i --rm postgres:15-alpine cat /usr/local/share/postgresql/postg
 
 sudo docker volume create vol_pg15_data && \
 sudo docker network create net_pg
+
+sudo docker-compose -f pg15alpine.yaml up
+sudo docker-compose -f pgadmin4.yaml up

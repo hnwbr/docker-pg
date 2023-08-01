@@ -10,9 +10,9 @@ services:
     networks:
       - net_pg
     ports:
-      - '54321:54321'
+      - '54301:54321'
     volumes:
-      - ./db-mount:/var/lib/postgresql/
+      - ./bind-db:/var/lib/postgresql/data/
       # - vol_pg15_data:/var/lib/postgresql/data/pgdata
       # - type: bind
       #   source: ./postgresql.conf

@@ -1,4 +1,6 @@
-/db-mount
+/bind-*
+/tmp
+/.tmp
 
 # dotenv environment variables file
 .env

@@ -8,4 +8,7 @@ sudo docker volume create vol_pg15_data && \
 sudo docker network create net_pg
 
 sudo docker-compose -f pg15alpine.yaml up
+
+sudo chown -R 5050:5050 ./bind-var-lib-pgadmin
+
 sudo docker-compose -f pgadmin4.yaml up

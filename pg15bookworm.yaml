@@ -1,7 +1,7 @@
 services:
-  pg15alpine:
-    container_name: pg15alpine
-    image: postgres:15-alpine
+  pg15bookworm:
+    container_name: pg15bookworm
+    image: postgres:15-bookworm
     restart: always
     environment:
       - POSTGRES_USER=${POSTGRES_USER}

@@ -1,33 +1,43 @@
 services:
   pg15alpine:
+    container_name: pg15alpine
     image: postgres:15-alpine
     restart: always
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PW}
       - POSTGRES_DB=${POSTGRES_DB}
-      # - PGDATA=/var/lib/postgresql/data/pgdata
+      # - PGDATA=/var/lib/postgresql/data/pgdata/
     networks:
       - net_pg
     ports:
-      - '54301:54321'
+      - "54301:54321"
     volumes:
-      - ./bind-db:/var/lib/postgresql/data/
-      # - vol_pg15_data:/var/lib/postgresql/data/pgdata
-      # - type: bind
-      #   source: ./postgresql.conf
-      #   target: /etc/postgresql/postgresql.conf
+      - ./bind/var-lib-postgresql:/var/lib/postgresql/data/
+      # - vol_pg15_data:/var/lib/postgresql/data/
+      - ./pg_hba.conf:/etc/postgresql/pg_hba.conf
+      - ./postgresql.conf:/etc/postgresql/postgresql.conf
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    command: postgres -c config_file=/etc/postgresql/postgresql.conf
 
   pgadmin4:
+    container_name: pgadmin4
     image: dpage/pgadmin4:latest
     restart: always
     environment:
       - PGADMIN_DEFAULT_EMAIL=${PGADMIN_MAIL}
       - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_PW}
+      # - PGADMIN_ENABLE_TLS=True
     networks:
       - net_pg
     ports:
-      - '5050:80'
+      - "5050:80" # use port 443 for TLS
+    volumes:
+      - ./bind/var-lib-pgadmin:/var/lib/pgadmin
+      # - ./bind/pgadmin4:/pgadmin4
+      # - ./path/to/certificate.cert:/certs/server.cert
+      # - ./path/to/certificate.key:/certs/server.key
+      - ./bind/pgadmin4/servers.json:/pgadmin4/servers.json
     depends_on:
       - pg15alpine
 

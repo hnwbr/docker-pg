@@ -8,13 +8,14 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PW}
       - POSTGRES_DB=${POSTGRES_DB}
       # - PGDATA=/var/lib/postgresql/data/pgdata
-    # networks:
-    #   - net_pg
+    networks:
+      - net_pg
     ports:
       - "54301:54321"
     volumes:
       - ./bind-db:/var/lib/postgresql/data/
       # - vol_pg15_data:/var/lib/postgresql/data/pgdata
+      - ./pg_hba.conf:/var/lib/postgresql/data/pg_hba.conf
       - type: bind
         source: ./postgresql.conf
         target: /etc/postgresql/postgresql.conf

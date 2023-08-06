@@ -7,8 +7,8 @@ services:
       - PGADMIN_DEFAULT_EMAIL=${PGADMIN_MAIL}
       - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_PW}
       # - PGADMIN_ENABLE_TLS=True
-    # networks:
-    #   - net_pg
+    networks:
+      - net_pg
     ports:
       - "5050:80" # use port 443 for TLS
     volumes:

@@ -5,7 +5,7 @@ services:
     restart: always
     env_file: .env
     networks:
-      - host
+      - net_pg
     ports:
       - 54301:54321
     volumes:
@@ -22,7 +22,7 @@ services:
     restart: always
     env_file: .env
     networks:
-      - host
+      - net_pg
     ports:
       - 5050:80
       - 443:443
@@ -34,3 +34,7 @@ services:
       - ./bind/pgadmin4/servers.json:/pgadmin4/servers.json
     depends_on:
       - pg15alpine
+
+networks:
+  net_pg:
+    external: true

@@ -3,13 +3,9 @@ services:
     container_name: pg15alpine
     image: postgres:15-alpine
     restart: always
-    environment:
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PW}
-      - POSTGRES_DB=${POSTGRES_DB}
-      # - PGDATA=/var/lib/postgresql/data/pgdata/
+    env_file: .env
     networks:
-      - net_pg
+      - host
     ports:
       - 54301:54321
     volumes:
@@ -24,12 +20,9 @@ services:
     container_name: pgadmin4
     image: dpage/pgadmin4:latest
     restart: always
-    environment:
-      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_MAIL}
-      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_PW}
-      # - PGADMIN_ENABLE_TLS=True
+    env_file: .env
     networks:
-      - net_pg
+      - host
     ports:
       - 5050:80
       - 443:443
@@ -41,10 +34,3 @@ services:
       - ./bind/pgadmin4/servers.json:/pgadmin4/servers.json
     depends_on:
       - pg15alpine
-
-networks:
-  net_pg:
-    # external: true
-# volumes:
-#   vol_pg15_data:
-#     external: true

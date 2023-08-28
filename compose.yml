@@ -11,7 +11,7 @@ services:
     networks:
       - net_pg
     ports:
-      - "54301:54321"
+      - 54301:54321
     volumes:
       - ./bind/var-lib-postgresql:/var/lib/postgresql/data/
       # - vol_pg15_data:/var/lib/postgresql/data/
@@ -31,7 +31,8 @@ services:
     networks:
       - net_pg
     ports:
-      - "5050:80" # use port 443 for TLS
+      - 5050:80
+      - 443:443
     volumes:
       - ./bind/var-lib-pgadmin:/var/lib/pgadmin
       # - ./bind/pgadmin4:/pgadmin4
@@ -43,8 +44,7 @@ services:
 
 networks:
   net_pg:
-    external: true
-
-volumes:
-  vol_pg15_data:
-    external: true
+    # external: true
+# volumes:
+#   vol_pg15_data:
+#     external: true

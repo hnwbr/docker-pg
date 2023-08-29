@@ -1,5 +1,5 @@
 services:
-  pg15alpine:
+  postgres:
     container_name: pg15alpine
     image: postgres:15-alpine
     restart: always
@@ -16,10 +16,10 @@ services:
       - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
     command: postgres -c config_file=/etc/postgresql/postgresql.conf
 
-  pgadmin4:
+  pgadmin:
     container_name: pgadmin4
     image: dpage/pgadmin4:latest
-    restart: always
+    restart: unless-stopped
     env_file: .env
     networks:
       - net_pg
@@ -33,7 +33,7 @@ services:
       # - ./path/to/certificate.key:/certs/server.key
       - ./bind/pgadmin4/servers.json:/pgadmin4/servers.json
     depends_on:
-      - pg15alpine
+      - postgres
 
 networks:
   net_pg:

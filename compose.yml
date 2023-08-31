@@ -25,7 +25,7 @@ services:
       - net_pg
     ports:
       - 5050:80
-      - 443:443
+      - 5051:443
     volumes:
       - ./bind/var-lib-pgadmin:/var/lib/pgadmin
       # - ./bind/pgadmin4:/pgadmin4

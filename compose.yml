@@ -9,8 +9,8 @@ services:
     ports:
       - 54301:54321
     volumes:
-      - ./bind/var-lib-postgresql:/var/lib/postgresql/data/
-      # - vol_pg15_data:/var/lib/postgresql/data/
+      - var-lib-postgresql-data:/var/lib/postgresql/data/
+      # - ./bind/var-lib-postgresql:/var/lib/postgresql/data/
       - ./pg_hba.conf:/etc/postgresql/pg_hba.conf
       - ./postgresql.conf:/etc/postgresql/postgresql.conf
       - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
@@ -27,14 +27,21 @@ services:
       - 5050:80
       - 5051:443
     volumes:
-      - ./bind/var-lib-pgadmin:/var/lib/pgadmin
+      - var-lib-pgadmin:/var/lib/pgadmin
+      # - ./bind/var-lib-pgadmin:/var/lib/pgadmin
       # - ./bind/pgadmin4:/pgadmin4
+      # - ./bind/pgadmin4/servers.json:/pgadmin4/servers.json
       # - ./path/to/certificate.cert:/certs/server.cert
       # - ./path/to/certificate.key:/certs/server.key
-      - ./bind/pgadmin4/servers.json:/pgadmin4/servers.json
     depends_on:
       - postgres
 
 networks:
   net_pg:
+    external: true
+
+volumes:
+  var-lib-postgresql-data:
+    external: true
+  var-lib-pgadmin:
     external: true

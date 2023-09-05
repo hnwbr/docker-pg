@@ -4,7 +4,7 @@ https://www.pgadmin.org/docs/pgadmin4/latest/container_deployment.html
 
 sudo docker run -i --rm postgres:15-alpine cat /usr/local/share/postgresql/postgresql.conf.sample > my-postgres.conf
 
-sudo docker network create net_pg && \
+sudo docker network create net-pg && \
 sudo docker volume create var-lib-postgresql-data && \
 sudo docker volume create var-lib-pgadmin
 

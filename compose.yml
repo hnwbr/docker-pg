@@ -5,7 +5,7 @@ services:
     restart: always
     env_file: .env
     networks:
-      - net-pg
+      - pg
     ports:
       - 54301:54321
     volumes:
@@ -22,7 +22,7 @@ services:
     restart: unless-stopped
     env_file: .env
     networks:
-      - net-pg
+      - pg
     ports:
       - 5050:80
       - 5051:443
@@ -37,7 +37,7 @@ services:
       - postgres
 
 networks:
-  net-pg:
+  pg:
     external: true
 
 volumes:

@@ -22,6 +22,7 @@ services:
     restart: unless-stopped
     env_file: .env
     networks:
+      - nginx
       - pg
     ports:
       - 5050:80
@@ -38,6 +39,8 @@ services:
 
 networks:
   pg:
+    external: true
+  nginx:
     external: true
 
 volumes:

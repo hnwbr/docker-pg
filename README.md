@@ -8,8 +8,8 @@ sudo docker run -i --rm postgres:15-alpine cat /usr/local/share/postgresql/postg
 
 sudo docker network create pg;
 
-# sudo docker volume create var-lib-postgresql-data;
-# sudo docker volume create var-lib-pgadmin;
+sudo docker volume create var-lib-postgresql-data;
+sudo docker volume create var-lib-pgadmin;
 
 sudo mkdir bind;
 sudo mkdir bind/etc-pgdump;

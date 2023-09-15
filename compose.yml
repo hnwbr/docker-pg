@@ -46,6 +46,6 @@ networks:
 
 volumes:
   var-lib-postgresql-data:
-    # external: true
+    external: true
   var-lib-pgadmin:
-    # external: true
+    external: true

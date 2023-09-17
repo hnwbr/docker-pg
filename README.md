@@ -12,7 +12,7 @@ sudo docker volume create var-lib-postgresql-data;
 sudo docker volume create var-lib-pgadmin;
 
 sudo mkdir bind;
-sudo mkdir bind/etc-pgdump;
+sudo mkdir -p bind/etc-pgdump;
 
 # sudo mkdir bind/var-lib-pgadmin
 # sudo chown -R 5050:5050 ./bind/var-lib-pgadmin

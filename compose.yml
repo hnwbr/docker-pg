@@ -1,8 +1,16 @@
 services:
-  postgres:
+  pg15alpine:
     container_name: pg15alpine
     image: postgres:15-alpine
     restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 500m
+        reservations:
+          cpus: '0.2'
+          memory: 100m
     env_file: .env
     networks:
       - pg
@@ -18,9 +26,14 @@ services:
     command: postgres -c config_file=/etc/postgresql/postgresql.conf
 
   pgadmin:
-    container_name: pgadmin4
+    container_name: pgadmin
     image: dpage/pgadmin4:latest
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 200m
     env_file: .env
     networks:
       - nginx
@@ -36,7 +49,7 @@ services:
       # - ./path/to/certificate.cert:/certs/server.cert
       # - ./path/to/certificate.key:/certs/server.key
     depends_on:
-      - postgres
+      - pg15alpine
 
 networks:
   pg:

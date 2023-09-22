@@ -2,16 +2,16 @@ services:
   pg15alpine:
     container_name: pg15alpine
     image: postgres:15-alpine
+    env_file: .env
     restart: always
     deploy:
       resources:
         limits:
-          cpus: '1'
-          memory: 500m
+          cpus: $POSTGRES_LIMITS_CPUS
+          memory: $POSTGRES_LIMITS_MEMORY
         reservations:
-          cpus: '0.2'
-          memory: 100m
-    env_file: .env
+          cpus: $POSTGRES_RESERVATIONS_CPUS
+          memory: $POSTGRES_RESERVATIONS_MEMORY
     networks:
       - pg
     ports:
@@ -28,13 +28,13 @@ services:
   pgadmin:
     container_name: pgadmin
     image: dpage/pgadmin4:latest
+    env_file: .env
     restart: unless-stopped
     deploy:
       resources:
         limits:
-          cpus: '0.5'
-          memory: 200m
-    env_file: .env
+          cpus: $PGADMIN_LIMITS_CPUS
+          memory: $PGADMIN_LIMITS_MEMORY
     networks:
       - nginx
       - pg

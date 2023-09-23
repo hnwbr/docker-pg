@@ -17,4 +17,6 @@ sudo mkdir -p bind/etc-pgdump;
 # sudo mkdir bind/var-lib-pgadmin
 # sudo chown -R 5050:5050 ./bind/var-lib-pgadmin
 
+sudo docker compose --profile pgadmin up
+
 ```

@@ -1,7 +1,7 @@
 services:
-  pg15alpine:
-    container_name: pg15alpine
-    image: postgres:15-alpine
+  postgres:
+    container_name: postgres
+    image: postgres:${POSTGRES_VERSION_TAG:-15-alpine}
     env_file: .env
     restart: always
     deploy:
@@ -28,6 +28,9 @@ services:
   pgadmin:
     container_name: pgadmin
     image: dpage/pgadmin4:latest
+    profiles: ['pgadmin']
+    depends_on:
+      - postgres
     env_file: .env
     restart: unless-stopped
     deploy:
@@ -48,8 +51,6 @@ services:
       # - ./bind/pgadmin4/servers.json:/pgadmin4/servers.json
       # - ./path/to/certificate.cert:/certs/server.cert
       # - ./path/to/certificate.key:/certs/server.key
-    depends_on:
-      - pg15alpine
 
 networks:
   pg:

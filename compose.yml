@@ -1,7 +1,7 @@
 services:
   postgres:
     container_name: postgres
-    image: postgres:${POSTGRES_VERSION_TAG:-15-alpine}
+    image: postgres:${POSTGRES_VERSION_TAG:-alpine}
     env_file: .env
     restart: always
     deploy:
